@@ -1,0 +1,76 @@
+HTML
+<!doctype html>
+<html lang="id">
+  <head>
+    <title>E-Commerce Discount Engine</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #121212;
+        color: #fff;
+        padding: 30px;
+      }
+      .card {
+        background: #1e1e1e;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 400px;
+        border: 1px solid #333;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid #444;
+        background: #222;
+        color: #fff;
+      }
+      button {
+        background: #deff9a;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+      }
+      .result {
+        font-size: 20px;
+        font-weight: bold;
+        color: #deff9a;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Promo Checker v1.0</h2>
+
+      <label>Total Belanja (Rp):</label>
+      <input type="number" id="totalBelanja" value="120000" />
+
+      <label>Status Member:</label>
+      <select id="statusMember">
+        <option value="false">Regular</option>
+        <option value="true">Premium</option>
+      </select>
+
+      <label>Metode Pembayaran:</label>
+      <select id="metodeBayar">
+        <option value="Transfer">Transfer Bank</option>
+        <option value="COD">COD (Bayar di Tempat)</option>
+      </select>
+
+      <button onclick="hitungDiskonAplikasi()">Cek Total Diskon</button>
+
+      <div class="result" id="outputDiskon">Total Diskon: -</div>
+    </div>
+
+    <script>
+      function hitungDiskonAplikasi() {
+        alert("Haiiii");
+      }
+    </script>
+  </body>
+</html>
