@@ -1,0 +1,40 @@
+HTML
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Big O Stress Tester</title>
+    <style>
+        body { font-family: sans-serif; background: #1a1a1a; color: #fff; padding: 20px; }
+        .card { background: #2d2d2d; padding: 20px; border-radius: 8px; margin-bottom: 15px; }
+        button { background: #deff9a; border: none; padding: 8px 16px; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        .bad { color: #ff6b6b; } .good { color: #51cf66; }
+    </style>
+</head>
+<body>
+
+    <h2>Laboratorium Uji Performa: Big O Notation</h2>
+    <p>Kita akan menguji performa dengan membuat Array berisi <strong class="good">30.000 Data Angka</strong>.</p>
+    
+    <div class="card">
+        <h3>1. Uji O(1) - Akses Langsung</h3>
+        <button onclick="ujiO1()">Jalankan O(1)</button>
+        <p>Waktu Eksekusi: <span id="timeO1">-</span> ms</p>
+    </div>
+
+    <div class="card">
+        <h3>2. Uji O(n) - Linear Search Loop</h3>
+        <button onclick="ujiOn()">Jalankan O(n)</button>
+        <p>Waktu Eksekusi: <span id="timeOn">-</span> ms</p>
+    </div>
+
+    <div class="card">
+        <h3>3. Uji O(n²) - Nested Loop (Cek Duplikat)</h3>
+        <button onclick="ujiOn2()">Jalankan O(n²)</button>
+        <p>Waktu Eksekusi: <span id="timeOn2" class="bad">-</span> ms</p>
+    </div>
+
+<script>
+
+</script>
+</body>
+</html>

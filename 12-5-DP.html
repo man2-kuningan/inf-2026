@@ -1,0 +1,85 @@
+HTML
+<!doctype html>
+<html lang="id">
+  <head>
+    <title>Uji Performa Algoritma</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #222;
+        color: #fff;
+        padding: 20px;
+      }
+      .box {
+        background: #333;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
+      .fast {
+        color: #5efb6e;
+      }
+      .slow {
+        color: #ff5c5c;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Benchmark: Rekursif vs Dynamic Programming</h2>
+    <input type="number" id="inputN" value="30" />
+    <button onclick="jalankanUji()">Mulai Uji Performa</button>
+
+    <div class="box">
+      <h3>1. Metode Rekursif Biasa (D&C)</h3>
+      <p>Hasil: <span id="resRekursif">-</span></p>
+      <p>Waktu: <span id="timeRekursif" class="slow">-</span> ms</p>
+    </div>
+
+    <div class="box">
+      <h3>2. Metode Memoization (DP)</h3>
+      <p>Hasil: <span id="resDP">-</span></p>
+      <p>Waktu: <span id="timeDP" class="fast">-</span> ms</p>
+    </div>
+
+    <script>
+      // ... (Masukkan fungsi fiboRekursif dan fiboDP di sini) ...
+      function fiboRekursif(n) {
+        if (n <= 1) return n;
+        return fiboRekursif(n - 1) + fiboRekursif(n - 2);
+      }
+
+      function fiboDP(n) {
+        let memo = [0, 1];
+        for (let i = 2; i <= n; i++) {
+          memo[i] = memo[i - 1] + memo[i - 2]; // Menghitung dari bawah & disimpan
+        }
+        return memo[n];
+      }
+
+      function jalankanUji() {
+        let n = parseInt(document.getElementById("inputN").value);
+
+        // Uji DP dulu (Aman)
+        let t0 = performance.now();
+        let hasilDP = fiboDP(n);
+        let t1 = performance.now();
+        document.getElementById("resDP").innerText = hasilDP;
+        document.getElementById("timeDP").innerText = (t1 - t0).toFixed(4);
+
+        // Uji Rekursif (Beri peringatan jika n > 40)
+        if (n > 40) {
+          alert(
+            "Peringatan: Angka di atas 40 bisa membuat browser hang jika menggunakan Rekursif biasa!",
+          );
+        }
+        let t2 = performance.now();
+        let hasilRekursif = fiboRekursif(n);
+        let t3 = performance.now();
+        document.getElementById("resRekursif").innerText = hasilRekursif;
+        document.getElementById("timeRekursif").innerText = (t3 - t2).toFixed(
+          4,
+        );
+      }
+    </script>
+  </body>
+</html>

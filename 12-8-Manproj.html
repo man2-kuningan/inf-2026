@@ -1,0 +1,121 @@
+HTML
+<!doctype html>
+<html lang="id">
+  <head>
+    <title>DevOps Mini Kanban Board</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #0f172a;
+        color: #f8fafc;
+        padding: 20px;
+      }
+      .board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .column {
+        background: #1e293b;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        min-height: 300px;
+      }
+      .column h3 {
+        margin-top: 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #deff9a;
+        color: #deff9a;
+      }
+      .task-card {
+        background: #334155;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 6px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .task-card span {
+        font-size: 12px;
+        display: block;
+        margin-top: 5px;
+        color: #cbd5e1;
+        font-weight: bold;
+      }
+      .btn-move {
+        background: #deff9a;
+        color: #000;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Project Tracker: Aplikasi Kantin Digital (SDLC Flow)</h2>
+    <p>
+      Klik tombol untuk memindahkan fitur dari tahap perencanaan hingga
+      pengujian!
+    </p>
+
+    <div class="board">
+      <div class="column" id="col-backlog">
+        <h3>1. Planning & Analysis</h3>
+        <div class="task-card" id="task1">
+          <strong>Fitur: Top-up Saldo E-Kantin</strong>
+          <span>Tahap saat ini: Analisis Spek</span>
+          <button
+            class="btn-move"
+            onclick="moveTask('task1', 'col-progress', '2. Design & Coding')"
+          >
+            Gass Coding
+          </button>
+        </div>
+      </div>
+
+      <div class="column" id="col-progress">
+        <h3>2. Design & Coding</h3>
+      </div>
+
+      <div class="column" id="col-done">
+        <h3>3. Testing & Maintenance</h3>
+      </div>
+    </div>
+
+    <script>
+      function moveTask(taskId, targetColumnId, nextStageName) {
+        let card = document.getElementById(taskId);
+        let targetColumn = document.getElementById(targetColumnId);
+
+        // Update label teks tahapannya
+        card.querySelector("span").innerText =
+          "Tahap saat ini: " + nextStageName;
+
+        // Set up tombol berikutnya berdasarkan posisi kolom saat ini
+        let button = card.querySelector(".btn-move");
+        if (targetColumnId === "col-progress") {
+          button.innerText = "Gass Testing";
+          button.setAttribute(
+            "onclick",
+            `moveTask('${taskId}', 'col-done', '3. Testing & QA')`,
+          );
+        } else if (targetColumnId === "col-done") {
+          button.innerText = "🚀 Deploy & Live";
+          button.setAttribute(
+            "onclick",
+            `alert('Fitur sukses dirilis ke server produksi dan masuk tahap Maintenance!')`,
+          );
+        }
+
+        // Pindahkan card di dalam DOM HTML
+        targetColumn.appendChild(card);
+      }
+    </script>
+  </body>
+</html>

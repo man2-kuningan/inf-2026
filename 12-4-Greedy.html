@@ -1,0 +1,118 @@
+HTML
+<!doctype html>
+<html lang="id">
+  <head>
+    <title>Greedy Cashier Engine</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #13141f;
+        color: #fff;
+        padding: 30px;
+      }
+      .container {
+        background: #1b1c2e;
+        padding: 25px;
+        border-radius: 12px;
+        max-width: 450px;
+        border: 1px solid #2d2f48;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: none;
+        font-size: 16px;
+      }
+      input {
+        background: #25273c;
+        color: #fff;
+      }
+      button {
+        background: #deff9a;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .coin-list {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 15px;
+      }
+      .coin-badge {
+        background: #383a59;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+      }
+      .output-box {
+        margin-top: 20px;
+        padding: 15px;
+        background: #25273c;
+        border-radius: 8px;
+        border-left: 4px solid #deff9a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Smart Cashier (Greedy Engine)</h2>
+      <p>Pecahan tersedia dalam laci:</p>
+      <div class="coin-list">
+        <span class="coin-badge">Rp20.000</span>
+        <span class="coin-badge">Rp10.000</span>
+        <span class="coin-badge">Rp5.000</span>
+        <span class="coin-badge">Rp2.000</span>
+      </div>
+
+      <label>Masukkan Uang Kembalian (Rp):</label>
+      <input type="number" id="inputUang" value="37000" />
+      <button onclick="hitungKembalianGreedy()">Hitung Pecahan Optimal</button>
+
+      <div class="output-box">
+        <h4>Hasil Pecahan Kembalian:</h4>
+        <div id="hasilPecahan">Belum ada transaksi.</div>
+        <p>
+          <strong>Sisa Uang tak Terkembalikan:</strong> Rp<span id="sisaUang"
+            >0</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function hitungKembalianGreedy() {
+        let sisaKembalian = parseInt(
+          document.getElementById("inputUang").value,
+        );
+
+        // Array kandidat pecahan (harus urut dari besar ke kecil)
+        const koinTersedia = [20000, 10000, 5000, 2000];
+        let hasil = [];
+
+        // Proses Algoritma Greedy
+        for (let i = 0; i < koinTersedia.length; i++) {
+          let pecahanSekarang = koinTersedia[i];
+
+          // Selama pecahan masih bisa mengurangi sisa kembalian (Rakus mengambil yang terbesar)
+          while (sisaKembalian >= pecahanSekarang) {
+            sisaKembalian -= pecahanSekarang;
+            hasil.push("Rp" + pecahanSekarang.toLocaleString("id-ID"));
+          }
+        }
+
+        // Tampilkan ke UI
+        if (hasil.length > 0) {
+          document.getElementById("hasilPecahan").innerHTML = hasil.join(" + ");
+        } else {
+          document.getElementById("hasilPecahan").innerHTML =
+            "Tidak ada pecahan yang cocok.";
+        }
+        document.getElementById("sisaUang").innerText =
+          sisaKembalian.toLocaleString("id-ID");
+      }
+    </script>
+  </body>
+</html>

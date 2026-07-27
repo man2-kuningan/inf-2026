@@ -1,0 +1,149 @@
+HTML
+<!doctype html>
+<html lang="id">
+  <head>
+    <title>IGD Triage & Priority Queue</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #0c0d14;
+        color: #fff;
+        padding: 25px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        max-width: 900px;
+      }
+      .card {
+        background: #161722;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #282a36;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: none;
+        font-size: 15px;
+      }
+      input,
+      select {
+        background: #212333;
+        color: #fff;
+      }
+      button {
+        background: #ff79c6;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      button.action-btn {
+        background: #8be9fd;
+        color: #000;
+      }
+      .patient-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+      }
+      .p1 {
+        background: #ff5555;
+        color: #fff;
+        font-weight: bold;
+      } /* Kritis */
+      .p2 {
+        background: #ffb86c;
+        color: #000;
+      } /* Sedang */
+      .p3 {
+        background: #50fa7b;
+        color: #000;
+      } /* Ringan */
+    </style>
+  </head>
+  <body>
+    <h2>Hospital IGD Triage System (Priority Queue Engine)</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Registrasi Pasien Masuk</h3>
+        <label>Nama Pasien:</label>
+        <input type="text" id="namaPasien" placeholder="Masukkan nama..." />
+
+        <label>Tingkat Kegawatan:</label>
+        <select id="levelUrgensi">
+          <option value="1">P1 - Kritis / Mengancam Nyawa</option>
+          <option value="2">P2 - Darurat Gawat (Patah Tulang, dll)</option>
+          <option value="3">P3 - Ringan (Demam, Batuk)</option>
+        </select>
+
+        <button onclick="tambahPasien()">Masukkan ke Antrean</button>
+      </div>
+
+      <div class="card">
+        <h3>Urutan Panggilan Pasien (Prioritas)</h3>
+        <button class="action-btn" onclick="panggilPasienTerdepan()">
+          Tangani Pasien Pertama
+        </button>
+        <div id="daftarAntrean" style="margin-top: 15px"></div>
+      </div>
+    </div>
+
+    <script>
+      let queuePasien = [];
+
+      function renderQueue() {
+        let container = document.getElementById("daftarAntrean");
+        container.innerHTML = "";
+
+        if (queuePasien.length === 0) {
+          container.innerHTML =
+            "<p style='color:#6272a4;'>Tidak ada pasien di antrean.</p>";
+          return;
+        }
+
+        queuePasien.forEach((pasien, index) => {
+          let div = document.createElement("div");
+          div.className = `patient-item p${pasien.urgensi}`;
+          div.innerHTML = `<span>[P${pasien.urgensi}] ${pasien.nama}</span> <span>#${index + 1}</span>`;
+          container.appendChild(div);
+        });
+      }
+
+      function tambahPasien() {
+        let nama = document.getElementById("namaPasien").value;
+        let urgensi = parseInt(document.getElementById("levelUrgensi").value);
+
+        if (!nama) return alert("Nama tidak boleh kosong!");
+
+        // Masukkan data baru
+        queuePasien.push({ nama: nama, urgensi: urgensi });
+
+        // ALGORITMA GREEDY & SORTING: Urutkan antrean secara real-time berdasarkan prioritas terkecil (P1 duluan)
+        queuePasien.sort((a, b) => a.urgensi - b.urgensi);
+
+        document.getElementById("namaPasien").value = ""; // Reset form
+        renderQueue();
+      }
+
+      function panggilPasienTerdepan() {
+        if (queuePasien.length === 0) return alert("Antrean kosong!");
+
+        // Ambil data pasien paling depan (index 0) yang sudah terurut secara prioritas
+        let pasienDitangani = queuePasien.shift();
+        alert(
+          `Pasien ${pasienDitangani.nama} (P${pasienDitangani.urgensi}) diarahkan ke Kamar Operasi/Tindakan.`,
+        );
+        renderQueue();
+      }
+    </script>
+  </body>
+</html>

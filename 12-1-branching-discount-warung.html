@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kantin Sekolah - Warung Mang Udin</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #f4f7f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .card {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+
+      .header h1 {
+        font-size: 22px;
+        color: #2c3e50;
+        margin-bottom: 6px;
+      }
+
+      .header p {
+        font-size: 14px;
+        color: #7f8c8d;
+      }
+
+      .badge-promo {
+        background-color: #fff3cd;
+        color: #856404;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        margin-top: 10px;
+        display: inline-block;
+        border: 1px solid #ffeeba;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #34495e;
+        margin-bottom: 8px;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      input[type="number"]:focus {
+        border-color: #3498db;
+      }
+
+      button {
+        width: 100%;
+        background-color: #2ecc71;
+        color: white;
+        border: none;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      button:hover {
+        background-color: #27ae60;
+      }
+
+      .struk-container {
+        margin-top: 24px;
+        background-color: #fafafa;
+        border: 2px dashed #cbd5e1;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .struk-title {
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: #475569;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .struk-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .struk-item.total {
+        border-top: 1px solid #e2e8f0;
+        padding-top: 10px;
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #0f172a;
+      }
+
+      .diskon-text {
+        color: #e74c3c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <h1>🍜 Warung Mang Udin</h1>
+        <p>Kantin Sekolah Ceria</p>
+        <div class="badge-promo">
+          💡 Promo: Belanja ≥ Rp 20.000 dapat diskon 10%!
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputBelanja">Jumlah Belanja (Rp):</label>
+        <input
+          type="number"
+          id="inputBelanja"
+          placeholder="Masukkan angka, contoh: 55000"
+        />
+      </div>
+
+      <!-- Member -->
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="checkMember" /> Saya adalah Member Warung
+          Mang Udin 👑
+        </label>
+      </div>
+
+
+      <button onclick="hitungBelanja()">Hitung Total</button>
+
+      <!-- Output Struk -->
+      <div class="struk-container">
+        <div class="struk-title">--- Struk Belanja ---</div>
+        <div class="struk-item">
+          <span>Total Awal:</span>
+          <span id="outputAwal">Rp 0</span>
+        </div>
+        <div class="struk-item diskon-text">
+          <span>Diskon:</span>
+          <span id="outputDiskon">Rp 0</span>
+        </div>
+        <div class="struk-item total">
+          <span>Total Bayar:</span>
+          <span id="outputBayar">Rp 0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPT JAVASCRIPT LATIHAN SISWA -->
+    <script>
+      function hitungBelanja() {
+        // 1. Mengambil data dari inputan
+        let totalBelanja = Number( document.getElementById("inputBelanja").value,);
+        // member atau bukan
+        let isMember = document.getElementById("checkMember").checked;
+        
+        let diskon = 0;
+        let totalBayar = 0;
+
+        // ========================================================
+        // TODO UNTUK SISWA:
+        // Tuliskan logika percabangan (if-else) di bawah ini!
+        // ========================================================
+
+        // 2. Tulis kodemu di bawah baris ini:
+        if(totalBelanja > 20000 && isMember){
+            
+        }
+
+
+
+        // ========================================================
+        // 3. Menampilkan hasil ke tampilan HTML
+        document.getElementById("outputAwal").innerText =
+          "Rp " + totalBelanja.toLocaleString("id-ID");
+        document.getElementById("outputDiskon").innerText =
+          "Rp " + diskon.toLocaleString("id-ID");
+        document.getElementById("outputBayar").innerText =
+          "Rp " + totalBayar.toLocaleString("id-ID");
+      }
+    </script>
+  </body>
+</html>
