@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATM Bank Java - Interactive PIN Loop</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", monospace, sans-serif;
+      }
+      body {
+        background-color: #0b132b;
+        color: #5bc0be;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .atm-frame {
+        background: linear-gradient(145deg, #1c2541, #0b132b);
+        border: 4px solid #3a506b;
+        border-radius: 20px;
+        padding: 30px;
+        width: 100%;
+        max-width: 440px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        text-align: center;
+      }
+      .screen {
+        background-color: #001219;
+        border: 2px solid #0a9396;
+        border-radius: 10px;
+        padding: 25px 20px;
+        margin-bottom: 20px;
+        box-shadow: inset 0 0 15px rgba(10, 147, 150, 0.3);
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .screen h2 {
+        color: #94d2bd;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+      .screen p {
+        color: #e9d8a6;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+      .pin-input {
+        background-color: #0a232e;
+        border: 2px solid #5bc0be;
+        border-radius: 6px;
+        color: #4ade80;
+        font-size: 1.5rem;
+        padding: 8px 15px;
+        width: 160px;
+        text-align: center;
+        letter-spacing: 5px;
+        outline: none;
+      }
+      .pin-input:focus {
+        border-color: #38bdf8;
+        box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+      }
+      .status-msg {
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 0.95rem;
+        min-height: 24px;
+      }
+      .hint {
+        color: #64748b;
+        font-size: 0.8rem;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="atm-frame">
+      <h1 style="color: #e9d8a6; font-size: 1.4rem; margin-bottom: 15px">
+        🏧 MANDAKU ATM
+      </h1>
+
+      <!-- Layar Utama ATM -->
+      <div class="screen">
+        <h2 id="screen-title">MASUKKAN PIN ANDA</h2>
+        <p id="screen-subtitle">Ketik PIN lalu tekan ENTER</p>
+
+        <!-- Input Box Password -->
+        <input
+          type="password"
+          id="pinInput"
+          class="pin-input"
+          maxlength="6"
+          placeholder="******"
+          onkeydown="cekEnter(event)"
+          autofocus
+        />
+
+        <div class="status-msg" id="statusMsg"></div>
+      </div>
+
+      <div class="hint">
+        Petunjuk: Masukkan 6 digit PIN anda lalu tekan Enter
+      </div>
+    </div>
+
+    <script>
+      const PIN_BENAR = "654321";
+      let percobaan = 0; // Menghitung total percobaan user
+      const MAX_COBA = 3; // Batas maksimal untuk logika FOR
+      let terblokir = false;
+
+      // Fungsi pendeteksi tombol Enter
+      function cekEnter(event) {
+        if (event.key === "Enter") {
+          if (terblokir) {
+            alert("ATM Terblokir! Tidak dapat menerima masukan lagi.");
+            return;
+          }
+
+          const inputUser = document.getElementById("pinInput").value;
+
+          // Panggil fungsi logika perulangan
+          prosesLogin(inputUser);
+
+          // Reset isi input box setelah tekan enter
+          document.getElementById("pinInput").value = "";
+        }
+      }
+
+      // =============================================================
+      // TUGAS SISWA: Pilih salah satu metode Looping di bawah ini!
+      // =============================================================
+      function prosesLogin(inputPIN) {
+        percobaan++;
+        const statusElement = document.getElementById("statusMsg");
+
+        /* 
+        -----------------------------------------------------------
+        OPSI A: Logika Tanpa Batas (WHILE)
+        -----------------------------------------------------------
+        Siswa memproses percobaan berulang kali sampai inputPIN === PIN_BENAR.
+      */
+
+        /* 
+        -----------------------------------------------------------
+        OPSI B: Logika Batas 3x (FOR)
+        -----------------------------------------------------------
+        Siswa mengecek apakah percobaan sudah mencapai MAX_COBA.
+        Jika percobaan >= MAX_COBA dan PIN masih salah, blokir akses.
+      */
+      }
+    </script>
+  </body>
+</html>

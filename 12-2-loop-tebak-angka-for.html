@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Tebak Angka (Maks 3x) - Looping Simulator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', monospace, sans-serif;
+    }
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .game-card {
+      background: #1e293b;
+      border: 3px solid #f59e0b;
+      border-radius: 16px;
+      padding: 30px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+      text-align: center;
+    }
+    h1 {
+      color: #f59e0b;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    .input-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .number-input {
+      background: #0f172a;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      color: #facc15;
+      font-size: 1.5rem;
+      padding: 8px;
+      width: 100px;
+      text-align: center;
+      outline: none;
+    }
+    .number-input:focus {
+      border-color: #f59e0b;
+    }
+    .number-input:disabled {
+      background: #334155;
+      border-color: #64748b;
+      color: #94a3b8;
+    }
+    .btn {
+      background: #d97706;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background: #b45309;
+    }
+    .btn:disabled {
+      background: #475569;
+      cursor: not-allowed;
+    }
+    .clue-box {
+      background: #0f172a;
+      border-radius: 8px;
+      padding: 15px;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .clue-text {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    .attempts-text {
+      font-size: 0.85rem;
+      color: #f8fafc;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-card">
+    <h1>🎯 TEBAK ANGKA (1-100)</h1>
+    <p>Kesempatan kamu terbatas: <b>Maksimal 3 kali!</b></p>
+
+    <div class="input-group">
+      <input 
+        type="number" 
+        id="userGuess" 
+        class="number-input" 
+        placeholder="?" 
+        min="1" 
+        max="100"
+        onkeydown="if(event.key === 'Enter') tebak()"
+        autofocus
+      >
+      <button class="btn" id="btnTebak" onclick="tebak()">TEBAK</button>
+    </div>
+
+    <div class="clue-box">
+      <div class="clue-text" id="clue">Masukkan tebakan pertama!</div>
+      <div class="attempts-text" id="attempts">Sisa Kesempatan: 3</div>
+    </div>
+  </div>
+
+  <script>
+    const ANGKA_RAHASIA = Math.floor(Math.random() * 100) + 1;
+    const MAX_COBA = 5;
+    let totalTebakan = 0;
+    let selesai = false;
+
+    function tebak() {
+      if (selesai) return;
+
+      const inputElement = document.getElementById("userGuess");
+      const btnElement = document.getElementById("btnTebak");
+      const clueElement = document.getElementById("clue");
+      const attemptsElement = document.getElementById("attempts");
+      const tebakanUser = parseInt(inputElement.value);
+
+      // Validasi jika input kosong
+      if (isNaN(tebakanUser)) {
+        clueElement.innerText = "Isi angkanya dulu! 😅";
+        clueElement.style.color = "#facc15";
+        return;
+      }
+
+      totalTebakan++;
+      let sisaKesempatan = MAX_COBA - totalTebakan;
+
+      // =============================================================
+      // LOGIKA PENGECEKAN TEBAKAN + LIMIT PERCOBAAN
+      // =============================================================
+
+
+      // Reset input box
+      inputElement.value = "";
+      if (!selesai) inputElement.focus();
+    }
+
+    // Fungsi pembantu untuk mengunci input ketika game selesai
+    function kunciGame() {
+      document.getElementById("userGuess").disabled = true;
+      document.getElementById("btnTebak").disabled = true;
+    }
+  </script>
+</body>
+</html>

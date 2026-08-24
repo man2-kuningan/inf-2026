@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kantin Mang Udin - Hitung Banyak Barang</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0fdf4; display: flex; justify-content: center; padding: 30px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { text-align: center; color: #166534; margin-bottom: 5px; }
+        p.subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 20px; }
+        .btn { width: 100%; background: #16a34a; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+        .btn:hover { background: #15803d; }
+        .output-box { margin-top: 20px; background: #f8fafc; border: 2px dashed #cbd5e1; padding: 15px; border-radius: 8px; font-family: monospace; }
+        .item-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 14px; }
+        .total-row { border-top: 1px solid #ccc; padding-top: 8px; font-weight: bold; color: #0f172a; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>🛍️ Warung Mang Udin</h2>
+        <p class="subtitle">Hitung Otomatis Banyak Barang (Looping)</p>
+
+        <button class="btn" onclick="prosesPerulangan()">+ Mulai Transaksi Barang</button>
+
+        <div class="output-box" id="areaStruk">
+            <div style="text-align: center; color: #888;">Klik tombol di atas untuk mulai memproses belanjaan.</div>
+        </div>
+    </div>
+
+    <script>
+        function prosesPerulangan() {
+            // 1. Meminta input jumlah jenis barang yang dibeli
+            let jumlahBarang = Number(prompt("Berapa jenis barang yang dibeli?"));
+
+            if (!jumlahBarang || jumlahBarang <= 0) {
+                alert("Jumlah barang harus angka lebih dari 0!");
+                return;
+            }
+
+            let totalBelanja = 0;
+            let teksTampilan = "<strong>--- DETAIL BELANJA ---</strong><br><br>";
+
+            // ========================================================
+            // TODO UNTUK SISWA (Materi Looping / Perulangan):
+            // Gunakan 'for loop' untuk meminta input harga barang 
+            // sebanyak 'jumlahBarang'.
+            // 
+            // Setiap perulangan:
+            // 1. Minta harga menggunakan prompt()
+            // 2. Tambahkan harga ke variabel 'totalBelanja' (Akumulator)
+            // 3. Tambahkan teks rincian ke 'teksTampilan'
+            // ========================================================
+
+            // TULIS KODE LOOPING SISWA DI BAWAH INI:
+
+            for (let i = 1; i <= jumlahBarang; i++) {
+                // 1. Minta input harga barang ke-i
+                let harga = Number(prompt("Masukkan harga untuk barang ke-" + i + " (Rp):"));
+
+                // 2. Akumulasi total belanja
+                totalBelanja = totalBelanja + harga;
+
+                // 3. Catat rincian ke tampilan
+                teksTampilan += "<div class='item-row'><span>Barang ke-" + i + "</span><span>Rp " + harga.toLocaleString("id-ID") + "</span></div>";
+            }
+
+            // ========================================================
+            // Menampilkan Total ke Layar Struk
+            teksTampilan += "<br><div class='item-row total-row'><span>TOTAL BELANJA:</span><span>Rp " + totalBelanja.toLocaleString("id-ID") + "</span></div>";
+            document.getElementById("areaStruk").innerHTML = teksTampilan;
+        }
+    </script>
+</body>
+</html>

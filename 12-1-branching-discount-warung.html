@@ -13,7 +13,7 @@
       }
 
       body {
-        background-color: #f4f7f6;
+        background-color: #f7f6f4;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -85,7 +85,7 @@
 
       button {
         width: 100%;
-        background-color: #2ecc71;
+        background-color: #251169;
         color: white;
         border: none;
         padding: 14px;
@@ -162,11 +162,10 @@
       <!-- Member -->
       <div class="form-group">
         <label>
-          <input type="checkbox" id="checkMember" /> Saya adalah Member Warung
+          <input type="checkbox" id="checkMember" /> Gue adalah Member Warung
           Mang Udin 👑
         </label>
       </div>
-
 
       <button onclick="hitungBelanja()">Hitung Total</button>
 
@@ -193,9 +192,10 @@
       function hitungBelanja() {
         // 1. Mengambil data dari inputan
         let totalBelanja = Number( document.getElementById("inputBelanja").value,);
+
         // member atau bukan
         let isMember = document.getElementById("checkMember").checked;
-        
+
         let diskon = 0;
         let totalBayar = 0;
 
@@ -205,9 +205,17 @@
         // ========================================================
 
         // 2. Tulis kodemu di bawah baris ini:
+        if(totalBelanja>10000) {
+          if(isMember){
+            diskon = totalBelanja * 0.15;
+          }else{
+            diskon = totalBelanja * 0.1;
+          }
+        } else{
+          diskon = 0;
+        }
 
-
-
+        totalBayar = totalBelanja - diskon;
 
         // ========================================================
         // 3. Menampilkan hasil ke tampilan HTML

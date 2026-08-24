@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Tebak Angka - Looping Simulator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', monospace, sans-serif;
+    }
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .game-card {
+      background: #1e293b;
+      border: 3px solid #38bdf8;
+      border-radius: 16px;
+      padding: 30px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+      text-align: center;
+    }
+    h1 {
+      color: #38bdf8;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    .input-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .number-input {
+      background: #0f172a;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      color: #facc15;
+      font-size: 1.5rem;
+      padding: 8px;
+      width: 100px;
+      text-align: center;
+      outline: none;
+    }
+    .number-input:focus {
+      border-color: #38bdf8;
+    }
+    .btn {
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background: #0369a1;
+    }
+    .clue-box {
+      background: #0f172a;
+      border-radius: 8px;
+      padding: 15px;
+      min-height: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .clue-text {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    .attempts-text {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-card">
+    <h1>🎯 TEBAK ANGKA</h1>
+    <p>Komputer menyimpan angka 1 - 100.<br>Coba tebak sampai benar!</p>
+
+    <div class="input-group">
+      <input 
+        type="number" 
+        id="userGuess" 
+        class="number-input" 
+        placeholder="?" 
+        min="1" 
+        max="100"
+        onkeydown="if(event.key === 'Enter') tebak()"
+        autofocus
+      >
+      <button class="btn" onclick="tebak()">TEBAK</button>
+    </div>
+
+    <div class="clue-box">
+      <div class="clue-text" id="clue">Masukkan angka pertama kamu!</div>
+      <div class="attempts-text" id="attempts">Percobaan: 0</div>
+    </div>
+  </div>
+
+  <script>
+    // Generate Angka Acak antara 1 - 100
+    const ANGKA_RAHASIA = Math.floor(Math.random() * 100) + 1;
+    let totalTebakan = 0;
+    let tertebak = false;
+
+    function tebak() {
+      if (tertebak) return;
+
+      const inputElement = document.getElementById("userGuess");
+      const tebakanUser = parseInt(inputElement.value);
+      const clueElement = document.getElementById("clue");
+      const attemptsElement = document.getElementById("attempts");
+
+      // Validasi input kosong
+      if (isNaN(tebakanUser)) {
+        clueElement.innerText = "Isi angkanya dulu dong! 😅";
+        clueElement.style.color = "#facc15";
+        return;
+      }
+
+      totalTebakan++;
+      attemptsElement.innerText = "Percobaan: " + totalTebakan;
+
+      // =============================================================
+      // TUGAS SISWA: Logika Pengecekan Tebakan 
+      // =============================================================
+
+
+      // Clear input setelah menebak
+      inputElement.value = "";
+      inputElement.focus();
+    }
+  </script>
+</body>
+</html>
