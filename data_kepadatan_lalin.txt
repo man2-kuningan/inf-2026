@@ -1,0 +1,52 @@
+data = [
+    {
+        "street_name": "Jalan B",
+        "distance": 4236,
+        "density_scale": "lancar"
+    },
+    {
+        "street_name": "Jalan D",
+        "distance": 699,
+        "density_scale": "lancar"
+    },
+    {
+        "street_name": "Jalan E",
+        "distance": 1935,
+        "density_scale": "sedang"
+    },
+    {
+        "street_name": "Jalan F",
+        "distance": 589,
+        "density_scale": "lancar"
+    },
+    {
+        "street_name": "Jalan G",
+        "distance": 1366,
+        "density_scale": "sangat macet"
+    },
+    {
+        "street_name": "Jalan J",
+        "distance": 710,
+        "density_scale": "lancar"
+    },
+    {
+        "street_name": "Jalan K",
+        "distance": 3726,
+        "density_scale": "macet"
+    },
+    {
+        "street_name": "Jalan M",
+        "distance": 2053,
+        "density_scale": "macet"
+    },
+    {
+        "street_name": "Jalan N",
+        "distance": 1929,
+        "density_scale": "sangat lancar"
+    },
+    {
+        "street_name": "Jalan O",
+        "distance": 2041,
+        "density_scale": "lancar"
+    },
+]
